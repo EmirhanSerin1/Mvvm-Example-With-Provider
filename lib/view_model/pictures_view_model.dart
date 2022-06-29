@@ -5,10 +5,12 @@ import 'package:mvvm_example_with_provider/services/services.dart';
 class ListPicturesViewModel{
   List<PicturesViewModel>? pictures;
 
-  Future<void> fetchPictures() async{
+  Future fetchPictures() async{
     final api = await PicsumService().fetcPicturesApi();
 
     this.pictures = api.map((e) => PicturesViewModel(e)).toList();
+
+    return pictures;
   }
 
 }

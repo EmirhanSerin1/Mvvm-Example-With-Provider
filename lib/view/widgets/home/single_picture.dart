@@ -1,8 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:mvvm_example_with_provider/model/picsum_model.dart';
 import 'package:mvvm_example_with_provider/view_model/pictures_view_model.dart';
-import 'package:transparent_image/transparent_image.dart';
 
 class SinglePicture extends StatefulWidget {
   const SinglePicture({

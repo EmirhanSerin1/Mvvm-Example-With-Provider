@@ -5,26 +5,28 @@
 // gestures. You can also use WidgetTester to find child widgets in the widget
 // tree, read text, and verify that the values of widget properties are correct.
 
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-
+import 'package:http/http.dart';
+import 'package:http/testing.dart';
 import 'package:mvvm_example_with_provider/main.dart';
+import 'package:mvvm_example_with_provider/services/services.dart';
+import 'package:mvvm_example_with_provider/view_model/pictures_view_model.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+  ListPicturesViewModel listPicturesViewModel = ListPicturesViewModel();
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+  group("Return body when fetch data is unsuccessful, ", () {
+    test('return body string when view model unsuccessful', () async {
+      expect( listPicturesViewModel.fetchPictures().toString(),
+          "Instance of \'Future<dynamic>\'");
+    });
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
-
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+    test('return body when service is unsuccessful', () async {
+      expect( PicsumService().fetcPicturesApi().toString(),
+          'Instance of \'Future<List<PicsumModel>>\'');
+    });
   });
 }
